@@ -27,6 +27,7 @@ export function Hero({ selectedPrompt: externalPrompt, clearSelectedPrompt }: He
   const [isCustom, setIsCustom] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
+  const [promptSent, setPromptSent] = useState(false);
   const maxLength = 100;
   const { toast } = useToast();
 
@@ -36,6 +37,7 @@ export function Hero({ selectedPrompt: externalPrompt, clearSelectedPrompt }: He
       console.log('Connected to ElevenLabs agent');
       setIsGenerating(false); // Connection established, no longer in connecting state
       setHasStarted(true);
+      setPromptSent(false); // Reset prompt sent flag on new connection
       toast({
         title: "Connected",
         description: "Audio agent is ready. Speak or type your request...",
@@ -45,6 +47,7 @@ export function Hero({ selectedPrompt: externalPrompt, clearSelectedPrompt }: He
       console.log('Disconnected from ElevenLabs agent');
       setIsGenerating(false);
       setHasStarted(false);
+      setPromptSent(false);
     },
     onError: (error: unknown) => {
       console.error('Conversation error:', error);
@@ -217,30 +220,26 @@ export function Hero({ selectedPrompt: externalPrompt, clearSelectedPrompt }: He
     }
   };
 
-  // Send user prompt after agent's first message
+  // Send user prompt after agent's first message (only once per connection)
   useEffect(() => {
-    if (hasStarted && conversation.status === 'connected' && selectedPrompt && !isCustom) {
+    // Only send if connected, not already sent, and we have a prompt
+    if (hasStarted && conversation.status === 'connected' && !promptSent) {
+      const finalPrompt = isCustom ? customPrompt : selectedPrompt;
+      
+      if (!finalPrompt || !finalPrompt.trim()) {
+        return; // Don't send empty prompts
+      }
+
       // Wait for agent's first message, then send user prompt
       const timer = setTimeout(() => {
-        console.log('Sending user prompt:', selectedPrompt);
-        conversation.sendUserMessage(selectedPrompt);
+        console.log('Sending prompt to agent:', finalPrompt);
+        conversation.sendUserMessage(finalPrompt);
+        setPromptSent(true); // Mark as sent to prevent duplicates
       }, 2000); // Wait 2 seconds for agent to finish greeting
 
       return () => clearTimeout(timer);
     }
-  }, [hasStarted, conversation.status, selectedPrompt, isCustom, conversation]);
-
-  // Send custom prompt if custom is selected
-  useEffect(() => {
-    if (hasStarted && conversation.status === 'connected' && customPrompt && isCustom) {
-      const timer = setTimeout(() => {
-        console.log('Sending custom prompt:', customPrompt);
-        conversation.sendUserMessage(customPrompt);
-      }, 2000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [hasStarted, conversation.status, customPrompt, isCustom, conversation]);
+  }, [hasStarted, conversation.status, promptSent, selectedPrompt, customPrompt, isCustom]);
 
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center bg-deep-charcoal pt-20 pb-12 px-4">
