@@ -21,34 +21,48 @@ export function AudioDemo() {
     const updateTime = () => setCurrentTime(audio.currentTime);
     const updateDuration = () => setDuration(audio.duration);
     const handleEnded = () => setIsPlaying(false);
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
 
     audio.addEventListener('timeupdate', updateTime);
     audio.addEventListener('loadedmetadata', updateDuration);
     audio.addEventListener('ended', handleEnded);
+    audio.addEventListener('play', handlePlay);
+    audio.addEventListener('pause', handlePause);
 
     return () => {
       audio.removeEventListener('timeupdate', updateTime);
       audio.removeEventListener('loadedmetadata', updateDuration);
       audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener('pause', handlePause);
     };
   }, []);
 
-  const togglePlay = () => {
+  const togglePlay = async () => {
     if (!audioRef.current) return;
 
     if (isPlaying) {
       audioRef.current.pause();
     } else {
-      audioRef.current.play();
+      try {
+        await audioRef.current.play();
+      } catch (error) {
+        console.error('Error playing audio:', error);
+        setIsPlaying(false);
+      }
     }
-    setIsPlaying(!isPlaying);
   };
 
-  const handleRestart = () => {
+  const handleRestart = async () => {
     if (!audioRef.current) return;
     audioRef.current.currentTime = 0;
-    audioRef.current.play();
-    setIsPlaying(true);
+    try {
+      await audioRef.current.play();
+    } catch (error) {
+      console.error('Error playing audio:', error);
+      setIsPlaying(false);
+    }
   };
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -234,7 +248,7 @@ export function AudioDemo() {
           </div>
 
           {/* Hidden Audio Element */}
-          <audio ref={audioRef} src="/audios/ElevenLabs_Lightening.wav" preload="metadata" />
+          <audio ref={audioRef} src="/audios/ElevenLabs_LighteningV2.wav" preload="metadata" />
         </motion.div>
       </div>
     </section>

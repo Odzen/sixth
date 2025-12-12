@@ -1,4 +1,83 @@
-export const translations = {
+// Define the structure type first
+type TranslationStructure = {
+  nav: {
+    mission: string;
+    technology: string;
+    demo: string;
+    tryExperience: string;
+  };
+  hero: {
+    title1: string;
+    title2: string;
+    description: string;
+  };
+  interactive: {
+    title: string;
+    description: string;
+    startTalking: string;
+    listening: string;
+    connecting: string;
+    endSession: string;
+    agentSpeaking: string;
+    listeningToYou: string;
+    microphoneAccess: string;
+    setupRequired: string;
+    configureAgent: string;
+  };
+  problem: {
+    title: string;
+    description: string;
+    card1Title: string;
+    card1Description: string;
+    card2Title: string;
+    card2Description: string;
+    card3Title: string;
+    card3Description: string;
+  };
+  howItWorks: {
+    title: string;
+    description: string;
+    step1Title: string;
+    step1Subtitle: string;
+    step1Description: string;
+    step2Title: string;
+    step2Subtitle: string;
+    step2Description: string;
+    step3Title: string;
+    step3Subtitle: string;
+    step3Description: string;
+  };
+  useCases: {
+    title: string;
+    description: string;
+    tryExperience: string;
+    case1Title: string;
+    case1Description: string;
+    case1Prompt: string;
+    case2Title: string;
+    case2Description: string;
+    case2Prompt: string;
+    case3Title: string;
+    case3Description: string;
+    case3Prompt: string;
+  };
+  footer: {
+    title: string;
+    description: string;
+    emailPlaceholder: string;
+    joinWaitlist: string;
+    joining: string;
+    successTitle: string;
+    successDescription: string;
+    tagline: string;
+    copyright: string;
+  };
+  common: {
+    loading: string;
+  };
+};
+
+export const translations: Record<'es' | 'en', TranslationStructure> = {
   es: {
     // Navbar
     nav: {
@@ -184,8 +263,7 @@ export const translations = {
       loading: 'Loading...',
     },
   },
-} as const;
+};
 
 export type Language = keyof typeof translations;
-export type TranslationKey = typeof translations['es'];
-
+export type TranslationKey = TranslationStructure;
