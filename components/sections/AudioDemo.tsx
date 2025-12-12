@@ -248,7 +248,7 @@ export function AudioDemo() {
           </div>
 
           {/* Hidden Audio Element */}
-          <audio ref={audioRef} src="/audios/ElevenLabs_LighteningV2.wav" preload="metadata" />
+          <audio ref={audioRef} src="/audios/ElevenLabs_Lightening_v2_05_combined_master.wav" preload="metadata" />
         </motion.div>
       </div>
     </section>
