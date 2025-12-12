@@ -36,10 +36,10 @@ export function Footer() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
             Join the Audio Revolution
           </h2>
-          <p className="text-xl text-white/70 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto">
             Be among the first to experience visual concepts through spatial audio. Sign up for early access and updates.
           </p>
         </motion.div>
@@ -67,7 +67,7 @@ export function Footer() {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="bg-neon-blue text-deep-charcoal hover:bg-neon-blue/90 font-semibold text-lg px-8 h-14 shadow-lg shadow-neon-blue/30"
+              className="bg-neon-blue text-deep-charcoal hover:!bg-bright-yellow hover:!shadow-bright-yellow/50 font-semibold text-base sm:text-lg px-6 sm:px-8 h-12 sm:h-14 shadow-lg shadow-neon-blue/30 transition-all hover:scale-105"
             >
               {isSubmitting ? 'Joining...' : 'Join Waitlist'}
             </Button>

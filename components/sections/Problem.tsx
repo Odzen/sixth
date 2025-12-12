@@ -6,18 +6,18 @@ import { BookOpen, MessageSquare, Sparkles } from 'lucide-react';
 const problems = [
   {
     icon: BookOpen,
-    title: 'Text descriptions fall short',
-    description: 'Reading about light, color, and visual phenomena cannot capture the essence of these experiences.',
+    title: 'Accessibility matters',
+    description: 'Content should be engaging and accessible for everyone, including people with visual impairments or learning differences.',
   },
   {
     icon: MessageSquare,
-    title: 'Words have limits',
-    description: 'How do you explain the brilliance of a sunset or the depth of a starry night through text alone?',
+    title: 'Audio tells stories',
+    description: 'Sound can convey depth, emotion, and spatial relationships in ways that create powerful, memorable experiences.',
   },
   {
     icon: Sparkles,
-    title: 'We create the experience',
-    description: 'Through immersive spatial audio narratives, listeners can experience visual concepts in a new dimension.',
+    title: 'We create experiences',
+    description: 'Through immersive spatial audio narratives, we bring concepts to life in a way everyone can enjoy and understand.',
   },
 ];
 
@@ -32,11 +32,11 @@ export function Problem() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Words are not enough.
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            Beyond Words. Beyond Sight.
           </h2>
-          <p className="text-xl text-white/70 max-w-3xl mx-auto">
-            Traditional education relies on visual examples that exclude visually impaired students from truly understanding abstract concepts.
+          <p className="text-lg sm:text-xl text-white/70 max-w-3xl mx-auto">
+            Traditional content relies heavily on visuals, limiting accessibility. We believe everyone deserves rich, immersive experiences regardless of ability.
           </p>
         </motion.div>
 
@@ -48,9 +48,9 @@ export function Problem() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.15 }}
-              className="group"
+              className="group h-full flex"
             >
-              <div className="relative h-full bg-white/5 backdrop-blur-sm border-2 border-neon-blue/20 rounded-2xl p-8 hover:border-neon-blue/60 transition-all duration-300 hover:shadow-2xl hover:shadow-neon-blue/20">
+              <div className="relative flex-1 bg-white/5 backdrop-blur-sm border-2 border-neon-blue/20 rounded-2xl p-8 hover:border-neon-blue/60 transition-all duration-300 hover:shadow-2xl hover:shadow-neon-blue/20">
                 <div className="absolute inset-0 bg-gradient-to-br from-neon-blue/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 <div className="relative">
@@ -58,11 +58,11 @@ export function Problem() {
                     <problem.icon className="w-8 h-8 text-deep-charcoal" strokeWidth={2.5} />
                   </div>
 
-                  <h3 className="text-2xl font-bold text-white mb-4">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">
                     {problem.title}
                   </h3>
 
-                  <p className="text-lg text-white/70 leading-relaxed">
+                  <p className="text-base sm:text-lg text-white/70 leading-relaxed">
                     {problem.description}
                   </p>
                 </div>

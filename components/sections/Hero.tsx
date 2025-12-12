@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,11 +14,28 @@ const predefinedPrompts = [
   'Custom prompt...',
 ];
 
-export function Hero() {
+interface HeroProps {
+  selectedPrompt?: string | null;
+  clearSelectedPrompt?: () => void;
+}
+
+export function Hero({ selectedPrompt: externalPrompt, clearSelectedPrompt }: HeroProps) {
   const [selectedPrompt, setSelectedPrompt] = useState(predefinedPrompts[0]);
   const [customPrompt, setCustomPrompt] = useState('');
   const [isCustom, setIsCustom] = useState(false);
   const maxLength = 100;
+
+  // Update prompt when external prompt is set
+  useEffect(() => {
+    if (externalPrompt) {
+      setSelectedPrompt(externalPrompt);
+      setIsCustom(false);
+      setCustomPrompt('');
+      if (clearSelectedPrompt) {
+        clearSelectedPrompt();
+      }
+    }
+  }, [externalPrompt, clearSelectedPrompt]);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -41,32 +58,31 @@ export function Hero() {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-deep-charcoal pt-20 px-4">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+    <section id="hero" className="min-h-screen flex items-center justify-center bg-deep-charcoal pt-20 pb-12 px-4">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-center w-full">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="space-y-8"
         >
-          <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
-            How do you explain{' '}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+            Experience the world through{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-bright-yellow">
-              &apos;Light&apos;
-            </span>{' '}
-            to someone who has never seen?
+              immersive audio
+            </span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-white/80 leading-relaxed">
-            Sixth translates visual experiences into immersive spatial audio narratives. We help visually impaired people understand the world through sound.
+          <p className="text-lg sm:text-xl md:text-2xl text-white/80 leading-relaxed">
+            Sixth creates immersive spatial audio experiences for everyone. We transform concepts and ideas into rich soundscapes, making content accessible and engaging for all, especially for people with disabilities.
           </p>
 
           <Button
             onClick={() => scrollToSection('technology')}
-            className="bg-neon-blue text-deep-charcoal hover:bg-neon-blue/90 font-semibold text-lg px-8 py-6 shadow-2xl shadow-neon-blue/40 group"
+            className="bg-neon-blue text-deep-charcoal hover:!bg-bright-yellow hover:!shadow-bright-yellow/50 font-semibold text-base sm:text-lg px-6 sm:px-8 py-5 sm:py-6 shadow-2xl shadow-neon-blue/40 group transition-all hover:scale-105"
           >
             Experience the Technology
-            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
           </Button>
         </motion.div>
 
@@ -137,7 +153,7 @@ export function Hero() {
             </div>
 
             <div className="space-y-4">
-              <label className="text-white font-semibold text-lg block">
+              <label className="text-white font-semibold text-base sm:text-lg block">
                 Try an Experience
               </label>
 
@@ -161,7 +177,7 @@ export function Hero() {
                     value={customPrompt}
                     onChange={(e) => setCustomPrompt(e.target.value.slice(0, maxLength))}
                     maxLength={maxLength}
-                    className="bg-white/10 border-2 border-neon-blue/30 text-white placeholder:text-white/40 text-lg focus:border-neon-blue"
+                    className="bg-white/10 border-2 border-neon-blue/30 text-white placeholder:text-white/40 text-base sm:text-lg focus:border-neon-blue"
                   />
                   <div className="flex justify-between items-center text-sm">
                     <button
@@ -180,9 +196,9 @@ export function Hero() {
               <Button
                 onClick={handleGenerate}
                 disabled={isCustom && !customPrompt.trim()}
-                className="w-full bg-gradient-to-r from-neon-blue to-bright-yellow text-deep-charcoal hover:opacity-90 font-semibold text-lg py-6 shadow-xl group"
+                className="w-full bg-gradient-to-r from-neon-blue to-bright-yellow text-deep-charcoal hover:!from-bright-yellow hover:!to-neon-blue font-semibold text-base sm:text-lg py-5 sm:py-6 shadow-xl group transition-all hover:scale-105 hover:shadow-2xl"
               >
-                <Sparkles className="mr-2 w-5 h-5 group-hover:rotate-12 transition-transform" />
+                <Sparkles className="mr-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform" />
                 Generate Audio Experience
               </Button>
             </div>

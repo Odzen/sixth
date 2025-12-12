@@ -6,8 +6,8 @@ import { Toaster } from '@/components/ui/toaster';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Sixth - Visual Experiences Through Spatial Audio',
-  description: 'Translating visual experiences into immersive spatial audio narratives. Helping visually impaired people understand the world through sound powered by ElevenLabs.',
+  title: 'Sixth - Immersive Audio Experiences for Everyone',
+  description: 'Creating immersive spatial audio experiences for everyone. Making content accessible and engaging for all, especially for people with disabilities.',
   openGraph: {
     images: [
       {
