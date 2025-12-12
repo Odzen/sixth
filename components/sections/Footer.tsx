@@ -6,11 +6,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Waves, Mail } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useLanguage } from '@/lib/i18n/LanguageContext';
 
 export function Footer() {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,8 +20,8 @@ export function Footer() {
 
     setTimeout(() => {
       toast({
-        title: "You're on the list!",
-        description: "We'll notify you when Sixth launches.",
+        title: t.footer.successTitle,
+        description: t.footer.successDescription,
       });
       setEmail('');
       setIsSubmitting(false);
@@ -27,7 +29,7 @@ export function Footer() {
   };
 
   return (
-    <footer id="waitlist" className="py-24 bg-deep-charcoal border-t border-neon-blue/20 px-4">
+    <footer id="waitlist" className="py-24 bg-[#050505] border-t border-white/10 px-4">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -37,10 +39,10 @@ export function Footer() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
-            Join the Audio Revolution
+            {t.footer.title}
           </h2>
           <p className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto">
-            Be among the first to experience visual concepts through spatial audio. Sign up for early access and updates.
+            {t.footer.description}
           </p>
         </motion.div>
 
@@ -57,19 +59,19 @@ export function Footer() {
               <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/40 w-5 h-5" />
               <Input
                 type="email"
-                placeholder="Enter your email"
+                placeholder={t.footer.emailPlaceholder}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="bg-white/10 border-neon-blue/30 text-white placeholder:text-white/40 h-14 pl-12 text-lg focus:border-neon-blue"
+                className="bg-white/10 border-cyan-500/30 text-white placeholder:text-white/40 h-14 pl-12 text-lg focus:border-cyan-400"
               />
             </div>
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="bg-neon-blue text-deep-charcoal hover:!bg-bright-yellow hover:!shadow-bright-yellow/50 font-semibold text-base sm:text-lg px-6 sm:px-8 h-12 sm:h-14 shadow-lg shadow-neon-blue/30 transition-all hover:scale-105"
+              className="bg-gradient-to-r from-cyan-400 to-blue-500 text-black hover:from-cyan-300 hover:to-blue-400 font-semibold text-base sm:text-lg px-6 sm:px-8 h-12 sm:h-14 shadow-lg shadow-cyan-500/30 transition-all hover:scale-105 rounded-full"
             >
-              {isSubmitting ? 'Joining...' : 'Join Waitlist'}
+              {isSubmitting ? t.footer.joining : t.footer.joinWaitlist}
             </Button>
           </div>
         </motion.form>
@@ -77,18 +79,18 @@ export function Footer() {
         <div className="border-t border-white/10 pt-12">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-neon-blue to-bright-yellow rounded-lg flex items-center justify-center shadow-lg shadow-neon-blue/30">
-                <Waves className="w-6 h-6 text-deep-charcoal" strokeWidth={2.5} />
+              <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center shadow-lg shadow-cyan-500/30">
+                <Waves className="w-6 h-6 text-black" strokeWidth={2.5} />
               </div>
               <span className="text-xl font-bold text-white">Sixth</span>
             </div>
 
             <p className="text-white/60 text-lg">
-              Bringing the visual world to life through sound.
+              {t.footer.tagline}
             </p>
 
             <p className="text-white/40">
-              © 2025 Sixth. All rights reserved.
+              {t.footer.copyright}
             </p>
           </div>
         </div>

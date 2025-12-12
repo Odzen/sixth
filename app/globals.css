@@ -4,11 +4,22 @@
 
 :root {
   --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 17, 24, 28;
-  --background-end-rgb: 17, 24, 28;
+  --background-start-rgb: 10, 10, 10;
+  --background-end-rgb: 10, 10, 10;
   --neon-blue: 0, 229, 255;
   --bright-yellow: 255, 238, 88;
-  --deep-charcoal: 17, 24, 28;
+  --deep-charcoal: 10, 10, 10;
+  --neon-purple: 168, 85, 247;
+  --neon-green: 74, 222, 128;
+  --neon-orange: 251, 146, 60;
+  --neon-pink: 236, 72, 153;
+  --neon-cyan: 34, 211, 238;
+}
+
+/* Dotted grid background */
+.dotted-bg {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
 }
 
 @media (prefers-color-scheme: dark) {

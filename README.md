@@ -1,20 +1,23 @@
 # Sixth 🎧
 
-**Transform visual concepts into immersive spatial audio experiences.**
+**Voice AI that helps people with disabilities experience visual content through sound.**
 
-Built for the Voice AI Hackathon - Making the world accessible through sound, especially for people with visual impairments.
+Built for the Voice AI Hackathon - Making visual content accessible for the 2.2 billion people worldwide with visual impairments.
 
 ## 💡 The Problem
 
-How do you explain "light" to someone who has never seen? Traditional text descriptions fall short. Sixth bridges this gap by creating vivid, immersive audio narratives that bring visual concepts to life through sound.
+Over 2.2 billion people worldwide have visual impairments. They miss out on visual content every day - from understanding what a sunset looks like to experiencing the colors of a rainbow. Traditional text descriptions and screen readers can't convey the depth, beauty, and emotion of visual experiences.
+
+Sixth solves this with AI-powered spatial audio that transforms visual concepts into immersive sound experiences.
 
 ## ✨ What It Does
 
+- ♿ **Accessibility First**: Designed specifically for people with visual impairments
 - 🎙️ **Voice AI Agent**: Real-time conversational agent powered by ElevenLabs
-- 🎵 **Spatial Audio**: Creates immersive 3D soundscapes 
-- 🌅 **Visual to Audio**: Transforms visual concepts (sunsets, colors, landscapes) into rich audio descriptions
-- 🎨 **Interactive Demos**: Pre-built experiences or custom prompts
-- ♿ **Accessibility First**: Designed for people with disabilities
+- 🎵 **Spatial Audio**: Creates immersive 3D soundscapes that convey depth and emotion
+- 🌅 **Visual to Audio**: Transforms visual concepts (sunsets, colors, landscapes) into rich audio narratives
+- 🎨 **Interactive Demos**: Try experiencing "How does the sun feel?" or "What does a rainbow look like?"
+- 🌍 **Universal Design**: Making content accessible for everyone
 
 ## 🎬 Quick Demo
 
@@ -51,11 +54,12 @@ Get your Agent ID from [elevenlabs.io/app/agents](https://elevenlabs.io/app/agen
 
 ## 🎯 Features for Voice AI Hackathon
 
-✅ **Real-time voice interaction** - Conversational AI agent  
-✅ **WebRTC audio streaming** - Low-latency spatial audio  
-✅ **Dynamic prompt handling** - Adapts to user requests  
-✅ **Accessibility focus** - Built for visually impaired users  
-✅ **Beautiful UX** - Visual feedback and animations  
+✅ **Assistive Technology** - Helps people with disabilities access visual content  
+✅ **Real-time voice interaction** - Natural conversational AI agent  
+✅ **WebRTC audio streaming** - Low-latency spatial audio for immersive experiences  
+✅ **Accessibility-first design** - Built by and for the disability community  
+✅ **Social Impact** - Addressing a real problem for 2.2 billion people  
+✅ **Scalable Solution** - Works for any visual concept or content  
 
 ## 🌐 Live Demo
 

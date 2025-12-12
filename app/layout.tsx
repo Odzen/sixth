@@ -2,12 +2,13 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from '@/components/ui/toaster';
+import { Providers } from '@/components/Providers';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Sixth - Immersive Audio Experiences for Everyone',
-  description: 'Creating immersive spatial audio experiences for everyone. Making content accessible and engaging for all, especially for people with disabilities.',
+  title: 'Sixth - Voice AI for Accessibility',
+  description: 'Voice AI que ayuda a personas con discapacidad. Transforma contenido visual en experiencias de audio espacial inmersivo.',
   openGraph: {
     images: [
       {
@@ -31,9 +32,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body className={inter.className}>
-        {children}
+        <Providers>
+          {children}
+        </Providers>
         <Toaster />
       </body>
     </html>
