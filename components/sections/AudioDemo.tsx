@@ -13,31 +13,63 @@ export function AudioDemo() {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
+  const [isSeeking, setIsSeeking] = useState(false);
 
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    const updateTime = () => setCurrentTime(audio.currentTime);
-    const updateDuration = () => setDuration(audio.duration);
-    const handleEnded = () => setIsPlaying(false);
+    // Set initial volume
+    audio.volume = volume;
+
+    const updateTime = () => {
+      if (!isSeeking) {
+        setCurrentTime(audio.currentTime);
+      }
+    };
+    
+    const updateDuration = () => {
+      if (audio.duration && isFinite(audio.duration) && audio.duration > 0) {
+        setDuration(audio.duration);
+      }
+    };
+    
+    const handleEnded = () => {
+      setIsPlaying(false);
+      setCurrentTime(0);
+    };
+    
     const handlePlay = () => setIsPlaying(true);
     const handlePause = () => setIsPlaying(false);
 
+    // Try to get duration from multiple events
     audio.addEventListener('timeupdate', updateTime);
     audio.addEventListener('loadedmetadata', updateDuration);
+    audio.addEventListener('durationchange', updateDuration);
+    audio.addEventListener('canplay', updateDuration);
+    audio.addEventListener('canplaythrough', updateDuration);
+    audio.addEventListener('loadeddata', updateDuration);
     audio.addEventListener('ended', handleEnded);
     audio.addEventListener('play', handlePlay);
     audio.addEventListener('pause', handlePause);
 
+    // Check duration immediately if already loaded
+    if (audio.readyState >= 1) {
+      updateDuration();
+    }
+
     return () => {
       audio.removeEventListener('timeupdate', updateTime);
       audio.removeEventListener('loadedmetadata', updateDuration);
+      audio.removeEventListener('durationchange', updateDuration);
+      audio.removeEventListener('canplay', updateDuration);
+      audio.removeEventListener('canplaythrough', updateDuration);
+      audio.removeEventListener('loadeddata', updateDuration);
       audio.removeEventListener('ended', handleEnded);
       audio.removeEventListener('play', handlePlay);
       audio.removeEventListener('pause', handlePause);
     };
-  }, []);
+  }, [isSeeking, volume]);
 
   const togglePlay = async () => {
     if (!audioRef.current) return;
@@ -73,11 +105,22 @@ export function AudioDemo() {
     }
   };
 
+  const handleSeekStart = () => {
+    setIsSeeking(true);
+  };
+
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTime = parseFloat(e.target.value);
     setCurrentTime(newTime);
     if (audioRef.current) {
       audioRef.current.currentTime = newTime;
+    }
+  };
+
+  const handleSeekEnd = () => {
+    setIsSeeking(false);
+    if (audioRef.current) {
+      setCurrentTime(audioRef.current.currentTime);
     }
   };
 
@@ -87,7 +130,7 @@ export function AudioDemo() {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
+  const progress = duration > 0 && isFinite(duration) ? (currentTime / duration) * 100 : 0;
 
   return (
     <section className="py-24 bg-[#0a0a0a] dotted-bg px-4">
@@ -164,9 +207,13 @@ export function AudioDemo() {
               <input
                 type="range"
                 min="0"
-                max={duration || 100}
-                value={currentTime}
+                max={duration && isFinite(duration) ? duration : 100}
+                value={Math.min(currentTime, duration && isFinite(duration) ? duration : currentTime)}
                 onChange={handleSeek}
+                onMouseDown={handleSeekStart}
+                onMouseUp={handleSeekEnd}
+                onTouchStart={handleSeekStart}
+                onTouchEnd={handleSeekEnd}
                 className="w-full h-2 bg-white/10 rounded-full appearance-none cursor-pointer
                   [&::-webkit-slider-thumb]:appearance-none
                   [&::-webkit-slider-thumb]:w-4
@@ -188,7 +235,7 @@ export function AudioDemo() {
               />
               <div className="flex justify-between text-sm text-white/60">
                 <span>{formatTime(currentTime)}</span>
-                <span>{formatTime(duration)}</span>
+                <span>{duration && isFinite(duration) ? formatTime(duration) : '--:--'}</span>
               </div>
             </div>
 
@@ -248,7 +295,11 @@ export function AudioDemo() {
           </div>
 
           {/* Hidden Audio Element */}
-          <audio ref={audioRef} src="/audios/ElevenLabs_Lightening_v2_05_combined_master.wav" preload="metadata" />
+          <audio 
+            ref={audioRef} 
+            src="/audios/ElevenLabs_Lightening_v2_05_combined_master_latest.wav" 
+            preload="auto"
+          />
         </motion.div>
       </div>
     </section>
