@@ -41,11 +41,13 @@ Get your Agent ID from [elevenlabs.io/app/agents](https://elevenlabs.io/app/agen
 
 ## 🛠️ Tech Stack
 
-- **Next.js 13** - React framework
+- **Next.js 15** - React framework (latest)
+- **React 19** - UI library (latest)
 - **ElevenLabs Agents** - Voice AI platform
 - **WebRTC** - Real-time audio streaming
-- **Tailwind CSS** - Styling
+- **Tailwind CSS 3.4** - Styling
 - **Framer Motion** - Animations
+- **TypeScript 5.7** - Type safety
 
 ## 🎯 Features for Voice AI Hackathon
 
