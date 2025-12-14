@@ -2,7 +2,7 @@
 
 **Voice AI that helps people with disabilities experience visual content through sound.**
 
-Built for the Voice AI Hackathon - Making visual content accessible for the 2.2 billion people worldwide with visual impairments.
+Built for the ElevenLabs Voice AI Global Hackathon - Making visual content accessible for the 2.2 billion people worldwide with visual impairments. Took the 1st place in Mexico City.
 
 ## 💡 The Problem
 
