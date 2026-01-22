@@ -2,7 +2,7 @@
 
 **Voice AI that helps people with disabilities experience visual content through sound.**
 
-Project Winner for the ElevenLabs Voice AI Global Hackathon in Mexico 2025 - Making visual content accessible for the 2.2 billion people worldwide with visual impairments. Took the 1st place in Mexico City.
+1st place for the ElevenLabs Voice AI Global Hackathon in Mexico City 2025 - Making visual content accessible for the 2.2 billion people worldwide with visual impairments.
 
 ## 💡 The Problem
 
